@@ -24,6 +24,9 @@ const useItemsStore = create<StoreState>((set) => ({
     set((state: StoreState) => {
       const newMap = new Map<Item, number>(state.quantitiesMap);
       let count = newMap.get(item);
+      if (count === undefined) {
+        return {quantitiesMap: state.quantitiesMap}
+      }
       if (count === 1) {
         newMap.delete(item);
         return { quantitiesMap: newMap };

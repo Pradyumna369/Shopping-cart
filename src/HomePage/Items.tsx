@@ -60,7 +60,7 @@ const Items = () => {
       {items.length > 0 ? (
         <div
           id="items"
-          className="grid grid-flow-row sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 w-full"
+          className="grid grid-flow-row sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-5 gap-4 p-4 w-full"
         >
           {items.map((item: Item) => (
             <ItemCard
