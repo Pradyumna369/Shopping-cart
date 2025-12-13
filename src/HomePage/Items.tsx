@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import type Item from "../Item.ts";
 import useItemsStore from "../store.ts";
 import ItemCard from "./ItemCard.tsx";
@@ -11,8 +10,7 @@ const Items = () => {
   const priceLimit = useItemsStore((state: StoreState) => state.priceLimit);
   const category = useItemsStore((state: StoreState) => state.category);
   const deliveryDay = useItemsStore((state: StoreState) => state.deliveryDay);
-  const items = useMemo(() => {
-    return availableItems.filter((item: Item) => {
+  const items =  availableItems.filter((item: Item) => {
       let meetsCriteria = true;
       if (customerReviews && customerReviews !== "none") {
         meetsCriteria = meetsCriteria && item.rating >= Number(customerReviews);
@@ -30,7 +28,7 @@ const Items = () => {
       }
       return meetsCriteria;
     });
-  }, [availableItems, customerReviews, priceLimit, category, deliveryDay]);
+  
   const date = (date: string) => {
     const deliver = new Date(date).toDateString();
     return (
