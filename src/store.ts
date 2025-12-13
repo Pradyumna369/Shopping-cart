@@ -1,8 +1,9 @@
 import { create } from "zustand";
 import { items } from "./Database";
 import type Item from "./Item";
+import type StoreState from "./StoreState";
 
-const useItemsStore = create((set) => ({
+const useItemsStore = create<StoreState>((set) => ({
   availableItems: items,
   filteredItems: [] as Array<Item>,
   quantitiesMap: new Map<Item, number>(),
@@ -10,8 +11,8 @@ const useItemsStore = create((set) => ({
   priceLimit: "none" as string,
   category: "none" as string,
   deliveryDay: "none" as string,
-  addCount: (item: any) =>
-    set((state: any) => {
+  addCount: (item: Item) =>
+    set((state: StoreState) => {
       const newMap = new Map<Item, number>(state.quantitiesMap);
       let count = newMap.get(item);
       if (count === undefined) {
@@ -20,8 +21,8 @@ const useItemsStore = create((set) => ({
       newMap.set(item, count + 1);
       return { quantitiesMap: newMap };
     }),
-  removeItem: (item: any) =>
-    set((state: any) => {
+  removeItem: (item: Item) =>
+    set((state: StoreState) => {
       const newMap = new Map<Item, number>(state.quantitiesMap);
       let count = newMap.get(item);
       if (count === 1) {
@@ -33,7 +34,7 @@ const useItemsStore = create((set) => ({
       }
     }),
   setFilteredItems: ({ filter }: any) =>
-    set((state: any) => ({
+    set((state: StoreState) => ({
       customerReviews: filter.customerReviews,
       priceLimit: filter.priceLimit,
       category: filter.category,

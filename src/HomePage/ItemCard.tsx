@@ -1,5 +1,6 @@
 import Rating from "@mui/material/Rating";
 import useItemsStore from "../store";
+import type StoreState from "../StoreState";
 const ItemCard = ({ props }: any) => {
   const item = props.item;
   const addToCart = props.addToCart;
@@ -7,7 +8,7 @@ const ItemCard = ({ props }: any) => {
   const arrivesBeforeChristmas = props.arrivesBeforeChristmas;
   const convertReviews = props.convertReviews;
   const convertTitle = props.convertTitle;
-  const cart = useItemsStore((state: any) => state.quantitiesMap);
+  const cart = useItemsStore((state: StoreState) => state.quantitiesMap);
   return (
     <div
       className="relative group w-60 h-110 bg-gray-100 rounded-lg"
@@ -29,10 +30,10 @@ const ItemCard = ({ props }: any) => {
             ({convertReviews(item.reviews)})
           </div>
         </div>
-        <span className="text-lg font-bold">${item.price}</span>
+        <span className="text-lg font-bold">${item.discountedPrice}</span>
         <span className="text-sm text-gray-500 ml-2">
           List:
-          <span className="line-through pl-1">${item.discountedPrice}</span>
+          <span className="line-through pl-1">${item.price}</span>
         </span>
         <p className="text-sm">
           FREE delivery <b>{date(item.deliverBy)}</b>

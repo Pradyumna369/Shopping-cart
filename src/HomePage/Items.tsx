@@ -1,10 +1,11 @@
 import type Item from "../Item.ts";
 import useItemsStore from "../store.ts";
 import ItemCard from "./ItemCard.tsx";
+import type StoreState from "../StoreState.ts";
 const Items = () => {
-  const addCount = useItemsStore((state: any) => state.addCount);
+  const addCount = useItemsStore((state: StoreState) => state.addCount);
   const addToCart = (item: Item) => addCount(item);
-  const items = useItemsStore((state: any) => state.filteredItems);
+  const items = useItemsStore((state: StoreState) => state.filteredItems);
   const date = (date: string) => {
     const deliver = new Date(date).toDateString();
     return (

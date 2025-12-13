@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useItemsStore from "../store.ts";
+import type StoreState from "../StoreState.ts";
 const FilterPanel = () => {
   const [customerReviews, setCustomerReviews] = useState<string | null>(null);
   const [priceLimit, setPriceLimit] = useState<string | null>(null);
@@ -12,8 +13,9 @@ const FilterPanel = () => {
     deliveryDay: deliveryDay ? deliveryDay : "none",
   };
   const setFilteredItems = useItemsStore(
-    (state: any) => state.setFilteredItems,
+    (state: StoreState) => state.setFilteredItems,
   );
+  
   setFilteredItems({ filter });
   return (
     <form className="w-60 h-screen p-4 border-r border-gray-300 sticky top-0">

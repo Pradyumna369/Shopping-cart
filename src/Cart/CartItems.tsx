@@ -1,11 +1,12 @@
 import useItemsStore from "../store.ts";
 import type Item from "../Item.ts";
+import type StoreState from "../StoreState.ts";
 
 const CartItems = () => {
-  const items = useItemsStore((state: any) => state.quantitiesMap);
-  let addedItems = [] as Array<Array<any>>;
-  const removeItem = useItemsStore((state: any) => state.removeItem);
-  const addItem = useItemsStore((state: any) => state.addCount);
+  const items = useItemsStore((state: StoreState) => state.quantitiesMap);
+  const addedItems = [] as Array<Array<any>>;
+  const removeItem = useItemsStore((state: StoreState) => state.removeItem);
+  const addItem = useItemsStore((state: StoreState) => state.addCount);
   items.forEach((quantity: number, item: Item) =>
     addedItems.push([item, quantity]),
   );
