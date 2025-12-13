@@ -1,10 +1,34 @@
 import type Item from "../Item.ts";
 import useItemsStore from "../store.ts";
 import ItemCard from "./ItemCard.tsx";
+import type StoreState from "../StoreState.ts";
 const Items = () => {
-  const addCount = useItemsStore((state: any) => state.addCount);
+  const addCount = useItemsStore((state: StoreState) => state.addCount);
   const addToCart = (item: Item) => addCount(item);
-  const items = useItemsStore((state: any) => state.filteredItems);
+  const availableItems = useItemsStore((state: StoreState) => state.availableItems);
+  const customerReviews = useItemsStore((state: StoreState) => state.customerReviews);
+  const priceLimit = useItemsStore((state: StoreState) => state.priceLimit);
+  const category = useItemsStore((state: StoreState) => state.category);
+  const deliveryDay = useItemsStore((state: StoreState) => state.deliveryDay);
+  const items =  availableItems.filter((item: Item) => {
+      let meetsCriteria = true;
+      if (customerReviews && customerReviews !== "none") {
+        meetsCriteria = meetsCriteria && item.rating >= Number(customerReviews);
+      }
+      if (priceLimit && priceLimit !== "none") {
+        meetsCriteria = meetsCriteria && item.price <= Number(priceLimit);
+      }
+      if (category && category !== "none") {
+        meetsCriteria = meetsCriteria && item.category === category;
+      }
+      if (deliveryDay && deliveryDay !== "none") {
+        const christmas = new Date("2025-12-25");
+        const deliverDate = new Date(item.deliverBy);
+        meetsCriteria = meetsCriteria && deliverDate < christmas;
+      }
+      return meetsCriteria;
+    });
+  
   const date = (date: string) => {
     const deliver = new Date(date).toDateString();
     return (
@@ -36,7 +60,7 @@ const Items = () => {
       {items.length > 0 ? (
         <div
           id="items"
-          className="grid grid-flow-row sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 justify-between"
+          className="grid grid-flow-row sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 w-full"
         >
           {items.map((item: Item) => (
             <ItemCard

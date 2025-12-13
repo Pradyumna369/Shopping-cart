@@ -1,12 +1,13 @@
 import useItemsStore from "../store";
 import type Item from "../Item";
+import type StoreState from "../StoreState";
 
 const TotalPanel = () => {
-  const cartItems = useItemsStore((state: any) => state.quantitiesMap);
+  const cartItems = useItemsStore((state: StoreState) => state.quantitiesMap);
   let total = 0;
   let count = 0;
   cartItems.forEach((quantity: number, item: Item) => {
-    total += item.price * quantity;
+    total += item.discountedPrice * quantity;
     count += quantity;
   });
   console.log("cart items", cartItems);

@@ -1,10 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import useItemsStore from "./store.ts";
+import type StoreState from "./StoreState.ts";
 
 export const Header = () => {
   const cartNotEmpty =
-    useItemsStore((state: any) => state.quantitiesMap).size > 0;
+    useItemsStore((state: StoreState) => state.quantitiesMap).size > 0;
   return (
     <div className="bg-green-900 flex items-center p-2 h-15 w-full justify-between">
       <Link to="/" className="text-5xl font-bold flex-none text-white p-2">

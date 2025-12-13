@@ -1,20 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useItemsStore from "../store.ts";
+import type StoreState from "../StoreState.ts";
 const FilterPanel = () => {
   const [customerReviews, setCustomerReviews] = useState<string | null>(null);
   const [priceLimit, setPriceLimit] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
   const [deliveryDay, setDeliveryDay] = useState<string | null>(null);
-  const filter = {
-    customerReviews: customerReviews ? customerReviews : "none",
-    priceLimit: priceLimit ? priceLimit : "none",
-    category: category ? category : "none",
-    deliveryDay: deliveryDay ? deliveryDay : "none",
-  };
-  const setFilteredItems = useItemsStore(
-    (state: any) => state.setFilteredItems,
+  const setFilter = useItemsStore(
+    (state: StoreState) => state.setFilter,
   );
-  setFilteredItems({ filter });
+  useEffect(() => {
+    const filter = {
+      customerReviews: customerReviews ? customerReviews : "none",
+      priceLimit: priceLimit ? priceLimit : "none",
+      category: category ? category : "none",
+      deliveryDay: deliveryDay ? deliveryDay : "none",
+    };
+    setFilter(filter);
+  }, [customerReviews, priceLimit, category, deliveryDay, setFilter]);
+  
   return (
     <form className="w-60 h-screen p-4 border-r border-gray-300 sticky top-0">
       <div className="font-bold text-xl">Shop all</div>
