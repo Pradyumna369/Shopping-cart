@@ -11,7 +11,7 @@ const TotalPanel = () => {
     count += quantity;
   });
   console.log("cart items", cartItems);
-  console.log("Total is", total);
+  console.log("Total is", total.toFixed(2));
   const freeDelivery = total >= 50;
   return (
     <div className="w-60 bg-white h-1/2 p-4 b-10 border rounded-lg border-gray-300">

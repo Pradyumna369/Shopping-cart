@@ -12,6 +12,7 @@ export const Header = () => {
         total += item.discountedPrice * quantity;
         count += quantity;
       });
+
   return (
     <div className="bg-green-900 flex w-7 items-center p-2 h-15 w-full justify-between">
       <Link to="/" className="text-5xl font-bold flex-none text-white p-2">
@@ -49,7 +50,7 @@ export const Header = () => {
       </div>
       <div className="flex flex-col text-center text-white pt-2 w-20">
         <div className="text-xs/2"><p>Total is:</p></div>
-        <div className="font-semibold">${total}</div>
+        <div className="font-semibold">${total.toFixed(2)}</div>
       </div>
       <div className="relative pr-2 flex">
         {count > 0 ? (
