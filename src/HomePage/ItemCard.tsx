@@ -21,7 +21,7 @@ const ItemCard = ({ props }: any) => {
     >
       <img src={item.image} alt="image" className="w-60 h-70" />
       <div className="p-2">
-        <p className="text-md font-semibold">{convertTitle(item.name)}</p>
+        <p className="text-md">{convertTitle(item.name)}</p>
         <div className="flex items-center">
           <div className="text-sm">{Number(item.rating).toFixed(1)}</div>
           <Rating
@@ -35,10 +35,13 @@ const ItemCard = ({ props }: any) => {
             ({convertReviews(item.reviews)})
           </div>
         </div>
-        <span className="text-lg font-bold">${item.discountedPrice}</span>
+          <span className="text-lg tracking-wide">
+            <span className="text-xs align-text-top">$</span>
+            <span className="font-semibold">{item.discountedPrice}</span>
+          </span>
         <span className="text-sm text-gray-500 ml-2">
           List:
-          <span className="line-through pl-1">${item.price}</span>
+          <span className="line-through pl-1 tracking-wide">${item.price}</span>
         </span>
         <p className="text-sm">
           FREE delivery <b>{date(item.deliverBy)}</b>
