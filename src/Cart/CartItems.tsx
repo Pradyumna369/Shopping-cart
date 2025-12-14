@@ -68,7 +68,7 @@ const CartItems = () => {
                   </div>
                 </div>
                 <div className="w-10 font-bold text-right">
-                  ${item[0].price}
+                  ${item[0].discountedPrice}
                 </div>
               </div>
             ))}
